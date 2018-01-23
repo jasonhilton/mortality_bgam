@@ -1,0 +1,13 @@
+type: holdback
+sex: two_sex
+start_year: 1961
+end_year: 2003
+model: mortality_two_sex_ll
+out_dir: results
+first_cut_point: 80
+run_no: 1
+n_forecast_years: 10
+cores: 4
+chains: 4
+iters: 8000
+thin: 4

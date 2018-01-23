@@ -1,0 +1,13 @@
+type: standard
+sex: female
+start_year: 1961
+end_year: 2013
+model: mortality
+out_dir: results
+first_cut_point: 90
+run_no: 1
+n_forecast_years: 50
+cores: 3
+chains: 3
+iters: 2000
+thin: 1

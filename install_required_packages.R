@@ -1,0 +1,21 @@
+install.packages(c("dplyr",
+                   "tidyr",
+                   "lavyeval",
+                   "tidyselect",
+                   "magrittr",
+                   "rstan",
+                   "purrr",
+                   "ggfan",
+                   "HMDHFDplus",
+                   "boot",
+                   "abind",
+                   "tibble",
+                   "loo",
+                   "XLConnect",
+                   "curl",
+                   "yaml",
+                   "devtools"),
+		             repos="https://cloud.r-project.org",
+		             dependencies = T)
+
+devtools::install_github("stan-dev/loo")

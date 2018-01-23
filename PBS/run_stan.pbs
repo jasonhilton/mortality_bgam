@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Set requirements for the job.
+# - these can be overridden on the qsub command line
+
+#PBS -l walltime=14:00:00
+#PBS -l nodes=1:ppn=4
+#PBS -t 1-16
+# above line tells pbs to submit an array, with 16 jobs,
+# and $PBS_ARRAYID numbering 1-16
+
+
+# Change to directory from which job was submitted.
+# (The actual name is held in the PBS environment variable $PBS_O_WORKDIR)
+
+cd $PBS_O_WORKDIR
+PATH=$PBS_O_PATH
+
+# Load the R module so that the R command can be found.
+module load R/3.4.2
+
+# pass $PBS_ARRAYID to the below rscript to determine which 
+# cutpoint is run
+Rscript run_single_stan_model.R $CONFIG $SEX $PBS_ARRAYID

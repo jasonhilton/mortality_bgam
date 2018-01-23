@@ -1,0 +1,13 @@
+
+results/*
+*.xml
+*.pdf
+*.aux
+*.bbl
+*.log
+*.gz
+*.rds
+*.blg
+*scratch*
+*.xls
+*.zip
