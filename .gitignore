@@ -11,3 +11,4 @@ results/*
 *scratch*
 *.xls
 *.zip
+.Rproj.user

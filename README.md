@@ -206,7 +206,7 @@ devtools::session_info()
 ##  language (EN)                        
 ##  collate  English_United Kingdom.1252 
 ##  tz       Europe/London               
-##  date     2018-01-23
+##  date     2018-01-24
 ```
 
 ```
