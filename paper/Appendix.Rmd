@@ -49,7 +49,7 @@ $$
 \pmb{\eta^{\dagger}} \\
 \pmb{\eta^{*}}
 \end{bmatrix} = Z\pmb{\epsilon} \\ 
-\pmb{\eta} &\sim \text{MVN}(\pmb{0}, ZZ^{T}\sigma_k).
+\pmb{\eta} &\sim \text{MVN}(\pmb{0}, ZZ^{T}\sigma_{\kappa}).
 \end{aligned}
 $$
 By conditioning on the first two values of $\pmb{\eta}$ (denoted $\pmb{\eta}^{\dagger}$) equalling zero, we can find the distribution of the last $t-2$ elements of $\pmb{\eta}$ using the standard conditional relationship for multivariate normal variables. Conditioning on these elements of $\pmb{\eta}$ being equal to zero is equivalent to conditioning on the constraints holding. We can therefore calculate the values of the first two values of $\pmb{\epsilon}$ by multiplying $\pmb{\eta}$ by the inverse of the $Z$ matrix.
@@ -65,15 +65,15 @@ $$
 \end{aligned}
 $$ where subscripts on the covariance matrices indicate partitions so that $\Sigma_{*\dagger}$ is the sub-matrix of $\Sigma$ with rows corresponding to $\eta^{*}$ and columns to $\eta^{\dagger}$.
 
-## Correlated period parameters for males and sexes. {-}
+## Correlated period parameters for males and females {-}
 When both sexes are modelled together, the joint distribution for the period innovations $\epsilon$ is as follows
 
 $$
 \begin{aligned}
 \pmb{\epsilon} \sim& \text{MVN} (\pmb{0}, P) \\
 P =& \begin{bmatrix}
-I_T \sigma^2_{kf}& I_T\sigma_{km}\sigma_{kf}\rho \\
-I_T\sigma_{km}\sigma_{kf}\rho&I_T \sigma^2_{km}
+I_T \sigma^2_{\kappa f}& I_T\sigma_{\kappa m}\sigma_{\kappa f}\rho \\
+I_T\sigma_{\kappa m}\sigma_{\kappa f}\rho&I_T \sigma^2_{\kappa m}
 \end{bmatrix}
 \end{aligned}
 $$ where $I_T$ is the identity matrix of length $T$, the number of periods.

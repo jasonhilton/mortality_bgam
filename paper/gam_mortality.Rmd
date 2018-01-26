@@ -51,7 +51,7 @@ fan_intervals <- seq(0,90,2)/100
 
 # Introduction
 
-The future level of mortality is of vital interest to policy makers and private insurers alike, as lower mortality results in greater expenditure on pension payments and higher social care spending. Individuals are living longer due to improved mortality conditions and will reach higher ages in greater number as the post-war baby-boom cohort ages, and thus forecasts of mortality at the oldest ages are becoming more important. However, these remain challenging to produce, as the available mortality data at these ages are sparse and concentrated in the most recent years. The work of @Dodd2018 in producing the 17\textsuperscript{th} iteration of the English Life Tables provided a methodology for mortality estimation that combines smoothing based on Generalised Additive Models [@Wood2006] at the youngest ages with a parametric model at older ages. This paper extends this approach to a forecasting context and introduces period and cohort effects, producing fully probabilistic mortality projections within a Bayesian framework.
+The future level of mortality is of vital interest to policy makers and private insurers alike, as lower mortality results in greater expenditure on pension payments and higher social care spending. Individuals are living longer due to improved mortality conditions and will reach higher ages in greater number as the post-war baby-boom cohort ages, and thus forecasts of mortality at the oldest ages are becoming more important. However, these remain challenging to produce, as the available mortality data at these ages are sparse and concentrated in the most recent years. The work of @Dodd2018 in producing the 17\textsuperscript{th} iteration of the English Life Tables provided a methodology for mortality estimation that combines smoothing based on Generalised Additive Models (GAMs) [@Wood2006] at the youngest ages with a parametric model at older ages. This paper extends this approach to a forecasting context and introduces period and cohort effects, producing fully probabilistic mortality projections within a Bayesian framework.
 
 
 
@@ -102,7 +102,7 @@ The smoothing of mortality rates is important in forecasting applications to avo
 
 Bayesian methods are also increasingly being employed for mortality forecasting in order to incorporate prior knowledge about underlying processes, and provide distributions of future mortality risk accounting for multiple sources of uncertainty. @Girosi2008 demonstrate methods for mortality forecasting within a Bayesian framework that allow for smoothing the underlying data together with borrowing strength across regions, as well as jointly forecasting cause-specific mortality. @Wisniowski2015 use the Lee-Carter method for all three components of demographic change (fertility, mortality and migration), again using Bayesian methods to obtain predictive probability distributions.
 
-The method developed in this paper combines elements of many of the approaches above, including allowing for smooth functions of age and cohort effects, while providing stable estimates of mortality at extreme ages and avoiding some of the problems caused by lack of robustness in parameter estimation discussed above. The model also shares some features with the Age-Period-Cohort-Improvements (APCI) model of @Richards2017, particularly in the structure of the main part of the model. However, there are some significant points of difference; the model described here applies to the entire age range, and adopts a Bayesian approach to account for all sources of uncertainty.
+The method developed in this paper combines elements of many of the approaches above, including allowing for smooth functions of age and cohort effects, while providing stable estimates of mortality at extreme ages and avoiding some of the problems caused by lack of robustness in parameter estimation discussed above. The model also shares some features with the APCI model of @Richards2017, particularly in the structure of the main part of the model. However, there are some significant points of difference; the model described here applies to the entire age range, and adopts a Bayesian approach to account for all sources of uncertainty.
 
 ## Structure
 The remainder of the paper is structured as follows: the next section (\ref{sec:model}) sets out the features of the model used in later sections. Section \ref{sec:data_est} details the data used and the estimation procedure. Section \ref{sec:fit} presents the posterior distributions of the GAM components and provides predictive distributions for log-rate forecasts, and Section \ref{sec:stacking} displays posterior distributions combined over several alternative models on the basis of in-sample predictive performance, using the method of @Yao2017. Section \ref{sec:joint} presents an alternative model where the sexes are fitted jointly, while Section \ref{sec:holdback} compares out-of-sample performance of the single-sex and joint models, using the years 2004-2013. Section \ref{sec:ons_results} contrasts forecasts from the joint model with those made by the UK Office for National Statistics [@OfficeforNationalStatistics2016c], and the final section offers some conclusions and directions for future work.
@@ -127,7 +127,7 @@ $$  {#eq:coef_priors}
 
 
 ## Generalised Additive Models for Mortality Forecasting
-The method of mortality forecasting developed in this paper fits a Generalised Additive Model (GAM) to the majority of the age range, whilst applying separate parametric models to older age groups and to infants. This allows a flexible but smooth fit where the data allow, and imposes some structure on the model where data are sparse, particularly at very high ages. Deaths $d_{xt}$ are considered to follow a negative binomial distribution parameterised in terms of the mean, which in this case is equal to the product of the relevant exposure $E_{xt}$ and expected death rate $m_{xt}$. The dispersion $\phi$ captures additional variance relative to the Poisson distribution:
+The method of mortality forecasting developed in this paper fits a GAM to the majority of the age range, whilst applying separate parametric models to older age groups and to infants. This allows a flexible but smooth fit where the data allow, and imposes some structure on the model where data are sparse, particularly at very high ages. Deaths $d_{xt}$ are considered to follow a negative binomial distribution parameterised in terms of the mean, which in this case is equal to the product of the relevant exposure $E_{xt}$ and expected death rate $m_{xt}$. The dispersion $\phi$ captures additional variance relative to the Poisson distribution:
 
 
 $$
@@ -186,18 +186,18 @@ $$
 \end{aligned}
 $$ {#eq:old_constraints}
 
-Infant mortality is also excluded from the GAM, as it behaves differently from mortality at other ages. The model for infants is given a similar structure to the old age model, except that the period effect $k_t$ is excluded, as variation in infant mortality with time does not appear to follow the same pattern as it does over the rest of the age range. 
+Infant mortality is also excluded from the GAM, as it behaves differently from mortality at other ages. The model for infants is given a similar structure to the old age model, except that the period effect $\kappa_t$ is excluded, as variation in infant mortality with time does not appear to follow the same pattern as it does over the rest of the age range. 
 
 $$
 \text{log}(m_{0t}) = \beta_1^{0} + \beta^{0}_1t +  s_{\gamma}(t) \;.
 $$ {#eq:infant}
 
-The period-specific effects $\kappa_t$ in Equations @eq:log_m and @eq:old_age are common across ages and capture deviations from the linear trend described by the smooth improvements $s_{\beta}$. These effects are not modelled as smooth, as they may capture effects such as weather conditions or infectious disease outbreaks that would not be expected to vary smoothly from year to year. The innovations in these period effects $\epsilon$ are given a normal prior with variance $\sigma_k$, so that
+The period-specific effects $\kappa_t$ in Equations @eq:log_m and @eq:old_age are common across ages and capture deviations from the linear trend described by the smooth improvements $s_{\beta}$. These effects are not modelled as smooth, as they may capture effects such as weather conditions or infectious disease outbreaks that would not be expected to vary smoothly from year to year. The innovations in these period effects $\epsilon$ are given a normal prior with variance $\sigma_{\kappa}$, so that
 
 $$
 \begin{aligned}
-k_t  &= k_{t-1} +  \epsilon_t  \\
-\epsilon_k &\sim \text{Normal}(0, \sigma_k^{2}) \;.
+\kappa_t  &= \kappa_{t-1} +  \epsilon_t  \\
+\epsilon_{\kappa} &\sim \text{Normal}(0, \sigma_{\kappa}^{2}) \;.
 \end{aligned}
 $$ {#eq:kappa}
 
@@ -206,7 +206,7 @@ However, these effects are constrained in order to identify the APC model, so we
 $$
 \begin{aligned}
 \pmb{\eta} &= Z\pmb{\epsilon} \\
-\pmb{\eta} &\sim \text{Multivarate Normal}(\pmb{0}, ZZ^{T}\sigma_k^{2}).
+\pmb{\eta} &\sim \text{Multivarate Normal}(\pmb{0}, ZZ^{T}\sigma_{\kappa}^{2}).
 \end{aligned}
 $$ {#eq:eta}
 
@@ -226,7 +226,7 @@ $$
 \pmb{\eta^{*}}
 \end{bmatrix},
 \end{aligned}
-$$ {#eq:conditional} where subscripts on the covariance matrices indicate partitions so that $\Sigma_{*\dagger}$ is the sub-matrix of $\Sigma$ with rows corresponding to $\eta^{*}$ and columns to $\eta^{\dagger}$.  Forecast innovations of the period coefficients are unconstrained and so have independent normal distributions with variance $\sigma_k^{2}$.
+$$ {#eq:conditional} where subscripts on the covariance matrices indicate partitions so that $\Sigma_{*\dagger}$ is the sub-matrix of $\Sigma$ with rows corresponding to $\eta^{*}$ and columns to $\eta^{\dagger}$.  Forecast innovations of the period coefficients are unconstrained and so have independent normal distributions with variance $\sigma_{\kappa}^{2}$.
 
 The same method is used to define a distribution for the innovations in the basis functions coefficients for the cohort spline, accounting for the cohort constraints in Equation @eq:constraints. In contrast to the period effects, however, the transformation matrix used accounts for the fact that the constraints apply to the resulting smooth function and not the coefficient values themselves. Knots for the basis functions of the cohort smooth are evenly spaced along the range of cohorts to be estimated, so forecasts of future cohort values can be obtained by drawing new coefficient innovations from the normal distribution with mean zero and variance $\sigma_{\gamma}^{2}$. Full details are given in the appendix.
 
@@ -251,7 +251,7 @@ The adoption of weakly informative priors aims to capture something about the ex
 
 
 # Estimation {#sec:data_est}
-Samples from the posterior distributions of the parameters and rates were drawn using Hamiltonian Monte Carlo (HMC) and specifically using the `stan` software package [@StanDevelopmentTeam2015]. Stan and its interface in the `R` programming language [@rman] allows the construction of a HMC 'No U-turns Sampler' (NUTS) [@Hoffman2014] from a simple user specification of the Bayesian model to be estimated. The code required to fit the model is provided in the supplementary materials for this paper. Hamiltonian Monte Carlo (HMC) is a special case of the more general Metropolis-Hastings algorithm for Markov Chain Monte-Carlo sampling, and uses the derivatives of log-posterior with respect to the parameters of interest in the sampling process, often allowing the posterior to be traversed much more quickly than is the case under standard methods [@Neal2010]. The model was fitted using Human Mortality Database data for the UK from 1961--2013 (@hmd). The first five cohorts (those born before 1856) are excluded, as exposures are very low for these groups. Four parallel chains were constructed, each with 8000 samples, and the first half of each chain was used as a warm-up period (during which `stan` tunes the algorithm to best reflect the characteristics of the posterior) and discarded. Parallel chains were used to better assess convergence to the posterior distribution; the diagnostic measure advocated by @Gelman1992 indicates that all parameters have converged to an acceptable degree. The 16000 post-warm-up samples were 'thinned' by a factor of 4 by discarding three values in four to avoid excessive memory usage, leaving 4000 posterior samples for inference for each model.
+Samples from the posterior distributions of the parameters and rates were drawn using Hamiltonian Monte Carlo (HMC) and specifically using the `stan` software package [@StanDevelopmentTeam2015]. Stan and its interface in the `R` programming language [@rman] allows the construction of a HMC 'No U-turns Sampler' (NUTS) [@Hoffman2014] from a simple user specification of the Bayesian model to be estimated. The code required to fit the model is provided in the supplementary materials for this paper. HMC is a special case of the more general Metropolis-Hastings algorithm for Markov Chain Monte-Carlo sampling, and uses the derivatives of log-posterior with respect to the parameters of interest in the sampling process, often allowing the posterior to be traversed much more quickly than is the case under standard methods [@Neal2010]. The model was fitted using Human Mortality Database data for the UK from 1961--2013 (@hmd). The first five cohorts (those born before 1856) are excluded, as exposures are very low for these groups. Four parallel chains were constructed, each with 8000 samples, and the first half of each chain was used as a warm-up period (during which `stan` tunes the algorithm to best reflect the characteristics of the posterior) and discarded. Parallel chains were used to better assess convergence to the posterior distribution; the diagnostic measure advocated by @Gelman1992 indicates that all parameters have converged to an acceptable degree. The 16000 post-warm-up samples were 'thinned' by a factor of 4 by discarding three values in four to avoid excessive memory usage, leaving 4000 posterior samples for inference for each model.
 
 
 # Initial Results {#sec:fit}
@@ -405,17 +405,17 @@ In the work described above, models for males and females are estimated separate
 $$
 \begin{aligned}
  \begin{bmatrix}
-           \pmb{\epsilon_{kf}} \\
-           \pmb{\epsilon_{km}}
+           \pmb{\epsilon_{\kappa f}} \\
+           \pmb{\epsilon_{\kappa m}}
          \end{bmatrix}
          &\sim \text{Multivariate Normal} \left( \textbf{0}, P \right) \\
          P &= \begin{bmatrix}
-I_T \sigma^2_{kf}& I_T\sigma_{km}\sigma_{kf}\rho \\
-I_T\sigma_{km}\sigma_{kf}\rho&I_T \sigma^2_{km}
+I_T \sigma^2_{\kappa f}& I_T\sigma_{\kappa m}\sigma_{\kappa f}\rho \\
+I_T\sigma_{\kappa m}\sigma_{\kappa f}\rho&I_T \sigma^2_{\kappa m}
 \end{bmatrix} \\
                   \rho &\sim \text{Beta}(1,1),
 \end{aligned}
-$$, with the $\epsilon_kf$ and $\epsilon_kf$ referring to period innovations for males and females respectively. The period innovations for each sex retain separate variance parameters, but are assumed to be joint multivariate normal, with the correlation determined by parameter $\rho$. This approach means that joint forecasts can be generated accounting for the fact that in potential futures where mortality for females is high, it will tend to be high for males as well. The prior distribution of the period parameters conditional on the constraints is obtained in a similar way to described in the Section \ref{sec:model}. More detail is given in the appendix.
+$$, with the $\epsilon_{\kappa m}$ and $\epsilon_{\kappa f}$ referring to period innovations for males and females respectively. The period innovations for each sex retain separate variance parameters, but are assumed to be joint multivariate normal, with the correlation determined by parameter $\rho$. This approach means that joint forecasts can be generated accounting for the fact that in potential futures where mortality for females is high, it will tend to be high for males as well. The prior distribution of the period parameters conditional on the constraints is obtained in a similar way to described in the Section \ref{sec:model}. More detail is given in the appendix.
 
 As before, LOOIC scores and model weights are obtained for the joint model (Figure @fig:joint_loo). The pattern of LOOICs and weights are similar to those for the separate models, with the highest transition point obtaining most weight, but considerable weight also attached to earlier transitions.
 
@@ -520,9 +520,6 @@ $$
 q_{xt} \approx 1-\text{exp}(-m_{xt}).
 $$ {#eq:qx}
 As well as the principal ONS projection from the 2014-based NPP, the variant projections involving high and low mortality scenarios have been included, allowing some understanding of how the existing indications of uncertainty resulting from different projection assumptions compare with the fully Bayesian probability distributions. 
-
-
-
 
 
 Figure @fig:forecast_25 shows posterior distributions of log-transformed death probabilities $q_x$ for a forecast horizon of 25 years for both males and females, together with the equivalent $q_{x+0.5}$ quantities for the same year (2038) obtained from the ONS 2014-based NPP. For most of the age range, the forecasts are similar, with the principal projection falling close to the median prediction under the GAM-based model. However, the ONS model projects lower mortality for young adults for both sexes, to the extent that the principal projections fall outside the outermost 90% predictive interval of the probabilistic projections. This is due to a greater weight given by the ONS methodology to more recent high improvement rates at these ages [see @OfficeforNationalStatistics2016c for more details regarding the ONS methodology].

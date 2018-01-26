@@ -98,11 +98,12 @@ qsub PBS/create_plot_data.pbs
 ```
 
 ## Compile the paper
-To produce the `tex` file needed to produce the manuscript, the below command runs knitr and pandoc.
+To produce the `tex` files needed to produce the manuscript, the below commands run knitr and pandoc to process the R markdown files `gam_mortality.Rmd` and `Appendix.Rmd`.
 
 
 ```bash
-Rscript paper/process_md.R
+cd paper
+Rscript process_md.R
 ```
 The resulting tex file can be `\include`-d in a tex template and compiled as normal.
 
@@ -206,7 +207,7 @@ devtools::session_info()
 ##  language (EN)                        
 ##  collate  English_United Kingdom.1252 
 ##  tz       Europe/London               
-##  date     2018-01-24
+##  date     2018-01-26
 ```
 
 ```
