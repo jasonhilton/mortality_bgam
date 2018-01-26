@@ -92,7 +92,7 @@ This reduces the complexity of the forecasting problem, as only the $\kappa$ com
 
 The simplicity of the Lee-Carter model has led to a large range of other adjustments and extensions. @Brouhns2002, for example, estimate the parameters through maximisation of a Poisson likelihood for the observed deaths rather than working with a Gaussian likelihood on the log-rates, as in the original paper. @rhageenhance, in contrast, include multiple bi-linear age-period terms to capture a greater proportion of the total variation than is possible with a single term.  
 
-@Renshaw2006 go further by adding a cohort term $\beta^{(2)}_x\gamma_{t-x}$ to allow for differences in mortality by year of birth. Models that include cohort terms are attractive as in some countries, and notably in the United Kingdom, cohort effects are prevalent in the underlying mortality data, possibly reflecting different life experiences and lifestyle habits of those born in different periods [@Willets2004; @Cairns2009]. Standard Age-Period-Cohort models can therefore capture such characteristics of the data, but given the linear dependence in such models (in that $c=t-x$, with $c$ indexing cohort), identifying constraints are needed for fitting.
+@Renshaw2006 go further by adding a cohort term $\beta^{(2)}_x\gamma_{t-x}$ to allow for differences in mortality by year of birth. Models that include cohort terms are attractive as in some countries, and notably in the United Kingdom, cohort effects are prevalent in the underlying mortality data, possibly reflecting the different life experiences and lifestyle habits of those born in different periods [@Willets2004; @Cairns2009]. Standard Age-Period-Cohort (APC) models can therefore capture such characteristics of the data, but given the linear dependence in such models (in that $c=t-x$, with $c$ indexing cohort), identifying constraints are needed for fitting.
 
 The work of Cairns and collaborators [@Cairns2009; @Dowd2010] describes a family of models where  mortality is modelled through sums of terms of the form $\beta_x\kappa_t\gamma_{t-x}$, where $\beta_x$ refers to age effects, $\kappa_t$ to period effects, and $\gamma_{t-x}$ to cohort effects. Any of these elements may be constant or deterministic in particular models, and so the Lee-Carter and Age-Period-Cohort models are incorporated as special cases. The in-sample and forecasting performance of these models are assessed against a number of criteria in @Cairns2009. A notable finding was the lack of robustness of many of the models investigated that included cohort effects; in particular, parameters in such models were found to be sensitive to the fitting period. Furthermore, @Palin2016 has identified some concerns regarding potentially spurious quadratic patterns in cohort effects in several of the models discussed above, caused by variation in mortality improvement rates by age being captured in the cohort effect.
 
@@ -102,7 +102,7 @@ The smoothing of mortality rates is important in forecasting applications to avo
 
 Bayesian methods are also increasingly being employed for mortality forecasting in order to incorporate prior knowledge about underlying processes, and provide distributions of future mortality risk accounting for multiple sources of uncertainty. @Girosi2008 demonstrate methods for mortality forecasting within a Bayesian framework that allow for smoothing the underlying data together with borrowing strength across regions, as well as jointly forecasting cause-specific mortality. @Wisniowski2015 use the Lee-Carter method for all three components of demographic change (fertility, mortality and migration), again using Bayesian methods to obtain predictive probability distributions.
 
-The method developed in this paper combines elements of many of the approaches above, including allowing for smooth functions of age and cohort effects, while providing stable estimates of mortality at extreme ages and avoiding some of the problems caused by lack of robustness in parameter estimation discussed above. The model also shares some features with the APCI model of @Richards2017, particularly in the structure of the main part of the model. However, there are some significant points of difference; the model described here applies to the entire age range, and adopts a Bayesian approach to account for all sources of uncertainty.
+The method developed in this paper combines elements of many of the approaches above, including allowing for smooth functions of age and cohort, while providing stable estimates of mortality at extreme ages and avoiding some of the problems caused by lack of robustness in parameter estimation discussed above. The model also shares some features with the APCI model of @Richards2017, particularly in the structure of the main part of the model. However, there are some significant points of difference; the model described here applies to the entire age range, and adopts a Bayesian approach to account for all sources of uncertainty.
 
 ## Structure
 The remainder of the paper is structured as follows: the next section (\ref{sec:model}) sets out the features of the model used in later sections. Section \ref{sec:data_est} details the data used and the estimation procedure. Section \ref{sec:fit} presents the posterior distributions of the GAM components and provides predictive distributions for log-rate forecasts, and Section \ref{sec:stacking} displays posterior distributions combined over several alternative models on the basis of in-sample predictive performance, using the method of @Yao2017. Section \ref{sec:joint} presents an alternative model where the sexes are fitted jointly, while Section \ref{sec:holdback} compares out-of-sample performance of the single-sex and joint models, using the years 2004-2013. Section \ref{sec:ons_results} contrasts forecasts from the joint model with those made by the UK Office for National Statistics [@OfficeforNationalStatistics2016c], and the final section offers some conclusions and directions for future work.
@@ -149,7 +149,7 @@ An equivalent expression of this model can be made in terms of mortality rates r
 $$
 \text{log}(m_{xt}) = s_{\alpha}(x) + s_{\beta}(x)t + s_{\gamma}(t-x) + \kappa_t,
 $$ {#eq:log_m}
-with the cohort and period terms now accumulated versions of their equivalents in the Equation @eq:APC. This is the model used in the estimation process. There are now two smooth functions of age: $s_{\alpha}(x)$, which describes the underlying shape of the log mortality curve; and $s_{\beta}(x)$ which describes the pattern of (linear) mortality improvements with age. Knots are spaced on regular intervals in both the age and cohort direction (every 4 years), with 3 knots placed outside the range of the data at either end of the age range, allowing for proper definition of the b-spline at the edge of the data.
+with the cohort and period terms now accumulated versions of their equivalents in the Equation @eq:APC. This is the model used in the estimation process. There are now two smooth functions of age: $s_{\alpha}(x)$, which describes the underlying shape of the log mortality curve; and $s_{\beta}(x)$ which describes the pattern of (linear) mortality improvements with age. Knots are spaced on regular intervals in both the age and cohort direction (every 4 years), with 3 knots placed outside the range of the data at either end of the age range, allowing for proper definition of the P-spline at the edge of the data.
 
 
 
@@ -164,7 +164,7 @@ $$
 s_{\gamma}(1) = 0 ; \;
 s_{\gamma}(\text{C}) = 0 \;,
 \end{aligned}
-$$ {#eq:constraints} with C here indicating the most recent cohort. These constraints ensure that linear improvements in mortality with time are estimated as part of the $s_{\beta}(x)$ term. 
+$$ {#eq:constraints} with $C$ here indicating the most recent cohort and $T$ the latest year. These constraints ensure that linear improvements in mortality with time are estimated as part of the $s_{\beta}(x)$ term. 
 
 For older ages, a parametric model is adopted due to the sparsity of the data in these regions -- the additional structure provided by specifying a parametric form guards against over-fitting and instabilities in this age range: 
 $$
@@ -176,13 +176,13 @@ $$ {#eq:old_age}
 
 A logistic form is used, allowing mortality rates to tend toward a constant $\psi$ as age increases, as in the model in @Beard1963. Such a pattern in mortality at the population level has some theoretical justification, as it can result when heterogeneity ('frailty') is applied to rates that follow a log-linear Gompertz mortality model at the individual level, and this frailty is assumed to be distributed amongst the population according to a gamma distribution [@Vaupel1979]. In the life-table context, @Dodd2018 found that the logistic form performed better than the log-linear equivalent when assessed using cross-validation techniques. Linear age and time effects are included in the old-age model, together with an interaction term, and the cohort and period effects are held in common with the model applied to younger ages and are applied multiplicatively to the logistic model. 
 
-Constraints are also applied to the parameters of the old age model to ensure that the derivative of the parametric part of the model with respect to age (ignoring the period and cohort effects) is never less than zero; this reflects our prior belief that mortality should not decrease with age after middle-age. The constraints required are as follows, with $T$ describing the most distant time for which forecasts are desired:
+Constraints are also applied to the parameters of the old age model to ensure that the derivative of the parametric part of the model with respect to age (ignoring the period and cohort effects) is never less than zero; this reflects our prior belief that mortality should not decrease with age after middle-age. The constraints required are as follows, with $H$ describing the most distant time for which forecasts are desired:
 
 $$
 \begin{aligned}
 \beta^{old}_1 &> 0 \\
 \beta^{old}_2 &< 0 \\
-\beta^{old}_3 &> - \frac{\beta^{old}_1}{\text{T}}  \;.
+\beta^{old}_3 &> - \frac{\beta^{old}_1}{\text{H}}  \;.
 \end{aligned}
 $$ {#eq:old_constraints}
 
@@ -226,7 +226,7 @@ $$
 \pmb{\eta^{*}}
 \end{bmatrix},
 \end{aligned}
-$$ {#eq:conditional} where subscripts on the covariance matrices indicate partitions so that $\Sigma_{*\dagger}$ is the sub-matrix of $\Sigma$ with rows corresponding to $\eta^{*}$ and columns to $\eta^{\dagger}$.  Forecast innovations of the period coefficients are unconstrained and so have independent normal distributions with variance $\sigma_{\kappa}^{2}$.
+$$ {#eq:conditional} where subscripts on the covariance matrices indicate partitions so that $\Sigma_{*\dagger}$ is the sub-matrix of $\Sigma$ with rows corresponding to $\eta^{*}$ and columns to $\eta^{\dagger}$.  For forecasts, innovations of the period coefficients are unconstrained and so have independent normal distributions with variance $\sigma_{\kappa}^{2}$.
 
 The same method is used to define a distribution for the innovations in the basis functions coefficients for the cohort spline, accounting for the cohort constraints in Equation @eq:constraints. In contrast to the period effects, however, the transformation matrix used accounts for the fact that the constraints apply to the resulting smooth function and not the coefficient values themselves. Knots for the basis functions of the cohort smooth are evenly spaced along the range of cohorts to be estimated, so forecasts of future cohort values can be obtained by drawing new coefficient innovations from the normal distribution with mean zero and variance $\sigma_{\gamma}^{2}$. Full details are given in the appendix.
 
@@ -313,7 +313,7 @@ rubbish<-gc()
 
 
 # Transition Points and Model Stacking {#sec:stacking}
-The choice made regarding the age at which the model transitions from the GAM (used over the majority of the age range) and the parametric model for old ages is essentially arbitrary; we do not believe that there is a switch between data-generating processes at some point  $x_{old}$, but rather that the task of predicting mortality is better served by two models. There is thus no 'true' value for the point of transition, and decisions regarding transition should be governed by model performance. The methodology used in the latest English Life Tables [@Dodd2018] used cross-validation to obtain posterior weights over a set of models $M$ defined by different $K$ cut-points, based on mortality data from 2010--2012. In that analysis, age 91 for females and 93 for males are the most probable points of transition, and the final predictive distribution was obtained by averaging over models using the calculated weights. However, the model described here differs to that used in @Dodd2018 in that it varies in time and applies to a period spanning many years, so the question of the distribution of the transition between the parametric model and the GAM must be revisited.
+The choice made regarding the age at which the model transitions from the GAM (used over the majority of the age range) to the parametric model for old ages is essentially arbitrary; we do not believe that there is a switch between data-generating processes at some point  $x_{old}$, but rather that the task of predicting mortality is better served by two models. There is thus no 'true' value for the point of transition, and decisions regarding transition should be governed by model performance. The methodology used in the latest English Life Tables [@Dodd2018] used cross-validation to obtain posterior weights over a set of models $M$ defined by $K$ different points of transition, based on mortality data from 2010--2012. In that analysis, age 91 for females and 93 for males are the most probable points of transition, and the final predictive distribution was obtained by averaging over models using the calculated weights. However, the model described here differs to that used in @Dodd2018 in that it varies in time and applies to a period spanning many years, so the question of the distribution of the transition between the parametric model and the GAM must be revisited.
 
 Separate models were therefore estimated for transition points ranging from 80 to 95, and their accuracy was assessed using the *Leave-One-Out Information Criteria*, (LOOIC), developed by @Vehtari2015. LOOIC is a measure of how well we might expect a model to perform in predicting a data-point without including it in the data used to fit the model. It is based on an approximation of the Leave-One-Out (LOO) log point-wise predictive density $\sum^{n}_{i=1}\text{log}\;p(y_i | y_{-i})$, where the $y_{-i}$ subscript indicates a data-set excluding the $i$th observation, $\theta$ is a vector of parameters, and:
 $$
@@ -321,12 +321,12 @@ p(y_i | y_{-i}) = \int p(y_i|\theta)p(\theta|y_{-i})d\theta  \;.
 $$
 Rather than fitting the model $n$ times (once for every data-point), @Vehtari2015 provide a method for approximating the LOOIC from just one set of posterior samples of the predictive density computed from the full data-set, implemented within the `loo` R package. This uses importance sampling to approximate the LOO log-predictive density, correcting for instabilities caused by high or infinite variance of the importance weights by fitting a Pareto distribution to the upper tail of the raw weights.
 
-The LOOIC score for males and females for the models with cut-points $k=[80,81,...,95]$ is given below in Figure \ref{fig:looic}. Later cut-points tend to be preferred because the greater flexibility of the GAM model gives higher LOOIC values even at relatively high ages, although the absolute differences between the models are small. Models with points of transition above age 95 are not considered, as this would leave too few data-points with which to estimate the old-age model effectively.
+The LOOIC scores for males and females for the models with transition points $k=[80,81,...,95]$ are given below in Figure \ref{fig:looic}. Later cut-points tend to be preferred because the greater flexibility of the GAM model gives higher LOOIC values even at relatively high ages, although the absolute differences between the models are small. Models with points of transition above age 95 are not considered, as this would leave too few data-points with which to estimate the old-age model effectively.
 
 
 Although LOOIC is not a measure of _forecast_ performance as such, as it is focused on how the model would perform at predicting data-points contained within the original data-set and does not consider the times at which data-points become available, it does provide an indication of how well the specified models reflect the structure of the data. 
 
-```{r looic,echo=FALSE,message=FALSE,error=FALSE,fig.height=3,fig.width=6, warning=FALSE, plot_lab=TRUE, fig.cap="LOOIC values for models using different cut-points"}
+```{r looic,echo=FALSE,message=FALSE,error=FALSE,fig.height=3,fig.width=6, warning=FALSE, plot_lab=TRUE, fig.cap="LOOIC values for models using different transition points"}
 
 library(purrr)
 cutpoints <- c(80:95)
@@ -346,14 +346,14 @@ multiplot(p_loo_f,p_loo_m, cols=2)
 ```
 
 
-Following the work by @Yao2017, these LOOIC values can be used for as the basis for 'stacking' the predictive distributions of each model to obtain an distribution which combines models in a principled way, with weights determined by approximate cross-validation performance. Stacking is often used for averaging over point estimates in ensemble models, but @Yao2017 extend the approach to apply to combining distributions. More specifically, the weights $\pmb{w}$, elements of which corresponding to one of $K$ possible models $M_k$, are estimated through the solution of the optimisation problem
+Following the work by @Yao2017, these LOOIC values can be used for as the basis for 'stacking' the predictive distributions of each model to obtain a distribution which combines models in a principled way, with weights determined by approximate cross-validation performance. Stacking is often used for averaging over point estimates in ensemble models, but @Yao2017 extend the approach to apply to combining distributions. More specifically, the weights $\pmb{w}$, elements of which corresponding to one of $K$ possible models $M_k$, are estimated through the solution of the optimisation problem
 
 $$
 \begin{aligned}
 \underset{\pmb{w}}{\operatorname{argmax}} \sum_{i=1}^{n}\text{log}\left(\sum_{k=1}^{K} w_k \;p(y_i|y_{-i}, M_k)\right) \\ \text{s.t.} \; w_k > 0 ; \; \sum_{k=1}^{K}w_k=1 \; .
 \end{aligned}
 $$ {#eq:stacking}
-[@Yao2017, p.7], where $p(y_i | y_{-i}, M_k)$ is approximated using the LOOIC measure described above. The form of the combined predictive distribution is then $\hat{p}(\tilde{y}|y) = \sum_{k=1}^{K}w_k p(\tilde{y}|y, M_k)$. The estimated model weights are shown in Figure @fig:weights; the greatest individual weight is given to models with the latest points of transitions, reflecting the pattern in the LOOIC measure. Other models with earlier cut-points are also given weight, however, reflecting that they perform well at predicting some data-points which are not so well estimated by the late-transition model.
+[@Yao2017, p.7], where $p(y_i | y_{-i}, M_k)$ is approximated using the LOOIC measure described above. The form of the combined predictive distribution is then $\hat{p}(\tilde{y}|y) = \sum_{k=1}^{K}w_k p(\tilde{y}|y, M_k)$. The estimated model weights are shown in Figure @fig:weights; the greatest individual weight is given to models with the latest points of transitions, reflecting the pattern in the LOOIC measure. Other models with earlier transition points are also given weight, however, reflecting that they perform well at predicting some data-points which are not so well estimated by the late-transition model.
 
 
 
@@ -400,22 +400,10 @@ ggplot(log_rates_ldf %>% filter(Year==2063), aes(x=Age, y=Log_rate)) +
 
 # Jointly modelling male and female mortality {#sec:joint}
 
-In the work described above, models for males and females are estimated separately. However, much of what drives the underlying processes of mortality and how it changes over time is likely to be common between sexes. Thus, we may gain from borrowing strength across models and also from explicitly representing covariances between parameters for each sex, as in @Wisniowski2015. Because males tend to die sooner than females, there are fewer data-points (that is, lower total exposure) with which to estimate parameters in the old-age model. For this reason, the parameter $\psi$, representing the asymptote of the logistic function in the old-age model, is now shared between sexes. We also allow the innovations in the period effects $\kappa_t$ to be correlated, so that
+In the work described above, models for males and females are estimated separately. However, much of what drives the underlying processes of mortality and how it changes over time is likely to be common between sexes. Thus, we may gain from borrowing strength across models and also from explicitly representing covariances between parameters for each sex, as in @Wisniowski2015. Because males tend to die sooner than females, there are fewer data-points (that is, lower total exposure) with which to estimate parameters in the old-age model. For this reason, the parameter $\psi$, representing the asymptote of the logistic function in the old-age model, is now shared between sexes.
 
-$$
-\begin{aligned}
- \begin{bmatrix}
-           \pmb{\epsilon_{\kappa f}} \\
-           \pmb{\epsilon_{\kappa m}}
-         \end{bmatrix}
-         &\sim \text{Multivariate Normal} \left( \textbf{0}, P \right) \\
-         P &= \begin{bmatrix}
-I_T \sigma^2_{\kappa f}& I_T\sigma_{\kappa m}\sigma_{\kappa f}\rho \\
-I_T\sigma_{\kappa m}\sigma_{\kappa f}\rho&I_T \sigma^2_{\kappa m}
-\end{bmatrix} \\
-                  \rho &\sim \text{Beta}(1,1),
-\end{aligned}
-$$, with the $\epsilon_{\kappa m}$ and $\epsilon_{\kappa f}$ referring to period innovations for males and females respectively. The period innovations for each sex retain separate variance parameters, but are assumed to be joint multivariate normal, with the correlation determined by parameter $\rho$. This approach means that joint forecasts can be generated accounting for the fact that in potential futures where mortality for females is high, it will tend to be high for males as well. The prior distribution of the period parameters conditional on the constraints is obtained in a similar way to described in the Section \ref{sec:model}. More detail is given in the appendix.
+We also allow the innovations in the period effects $\kappa_t$ to be correlated, so that
+that joint forecasts can be generated accounting for the fact that in potential futures where mortality for females is high, it will tend to be high for males as well. The joint distribution for the period innovations for both sexes, conditional on the constraints, is obtained in a similar way as for the single-sex models, described in Section \ref{sec:model}. Full details are given in the appendix.
 
 As before, LOOIC scores and model weights are obtained for the joint model (Figure @fig:joint_loo). The pattern of LOOICs and weights are similar to those for the separate models, with the highest transition point obtaining most weight, but considerable weight also attached to earlier transitions.
 
@@ -458,7 +446,8 @@ rm(log_rates_ldf_f)
 ggplot(log_rates_ldf %>% filter(Year==2038), 
        aes(x=Age, y=Log_rate, quantile=Quantile)) +
   geom_fan() +
-  ggtitle("Log rates, year = 2038") + theme_bw() + facet_wrap(~Sex) +  scale_fill_gradient(high="pink",low="darkred")
+  ggtitle("Log rates, year = 2038") + theme_bw() + facet_wrap(~Sex) +  scale_fill_gradient(high="pink",low="darkred") +
+  ylab("Log rate")
 rm(log_rates_ldf)
 
 ```

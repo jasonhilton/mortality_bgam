@@ -26,7 +26,7 @@ The complete set of MCMC results takes up about 20gb.
 
 # Reproducing the results.
 
-The results presented in the paper can be reproduced by following the steps below. 
+The results presented in the paper can be reproduced by following the steps below. All code chucks in this document should be run from the terminal from the base directory of this repository (that is, the one that contains this file).
 
 ## Installing R packages
 - The first step is to install a number of R packages. The command below does so programmatically, and can be run from the command line.

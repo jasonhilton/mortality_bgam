@@ -39,9 +39,9 @@ When the constraints hold,
 $$
 \begin{aligned}
 C\pmb{\kappa} &= \pmb{0} \\
-CS\pmb{\epsilon_t} &= \pmb{0},
+CS\pmb{\epsilon} &= \pmb{0},
 \end{aligned}
-$$ where $S$ is the cumulative sum matrix. A distribution for period innovations conditional on the constraints is obtained by first transforming $\epsilon$ into a new set of parameters $\eta$, where the first two elements of $\eta$ are zero when the constraints hold, and the remaining elements are identical to the equivalents in $\epsilon$. The matrix $Z$ used for this transformation is a $T$ by $T$ identity matrix with the first two rows replaced by the matrix $CS$.
+$$ where $S$ is the cumulative sum matrix. A distribution for period innovations conditional on the constraints is obtained by first transforming $\pmb{\epsilon}$ into a new set of parameters $\pmb{\eta}$, where the first two elements of $\pmb{\eta}$ are zero when the constraints hold, and the remaining elements are identical to the equivalents in $\pmb{\epsilon}$. The matrix $Z$ used for this transformation is a $T$ by $T$ identity matrix with the first two rows replaced by the matrix $CS$.
 
 $$
 \begin{aligned}
@@ -63,21 +63,24 @@ $$
 \pmb{\eta^{*}}
 \end{bmatrix},
 \end{aligned}
-$$ where subscripts on the covariance matrices indicate partitions so that $\Sigma_{*\dagger}$ is the sub-matrix of $\Sigma$ with rows corresponding to $\eta^{*}$ and columns to $\eta^{\dagger}$.
+$$ where subscripts on the covariance matrices indicate partitions so that $\Sigma_{*\dagger}$ is the sub-matrix of $\Sigma$ with rows corresponding to $\pmb{\eta^{*}}$ and columns to $\pmb{\eta^{\dagger}}$.
 
 ## Correlated period parameters for males and females {-}
-When both sexes are modelled together, the joint distribution for the period innovations $\epsilon$ is as follows
+When both sexes are modelled together, the period innovations for each sex retain separate variance parameters, but are assumed to be joint multivariate normal, with the correlation determined by parameter $\rho$. The joint distribution for the period innovations $\pmb{\epsilon}$ is therefore as follows:
 
 $$
 \begin{aligned}
-\pmb{\epsilon} \sim& \text{MVN} (\pmb{0}, P) \\
-P =& \begin{bmatrix}
+ \begin{bmatrix}
+           \pmb{\epsilon_{\kappa f}} \\
+           \pmb{\epsilon_{\kappa m}}
+         \end{bmatrix}
+         &\sim \text{Multivariate Normal} \left( \textbf{0}, P \right) \\
+         P &= \begin{bmatrix}
 I_T \sigma^2_{\kappa f}& I_T\sigma_{\kappa m}\sigma_{\kappa f}\rho \\
 I_T\sigma_{\kappa m}\sigma_{\kappa f}\rho&I_T \sigma^2_{\kappa m}
-\end{bmatrix}
-\end{aligned}
-$$ where $I_T$ is the identity matrix of length $T$, the number of periods.
-The individual innovation vectors for each sex are transformed to vectors $\eta_f$ and $\eta_m$ as in the univariate case. The implied joint multivariate distribution can then be conditioned on the constraints holding true for both sexes in the same way as before.
+\end{bmatrix} \\
+                  \rho &\sim \text{Beta}(1,1),
+\end{aligned}$$ where $I_T$ is the identity matrix of dimension $T$, the number of periods, and $\pmb{\epsilon_{\kappa m}}$ and $\pmb{\epsilon_{\kappa f}}$ refer to period innovations for males and females respectively. The prior distribution of the period parameters conditional on the constraints is obtained in a similar way to the single-sex case. The individual innovation vectors for each sex are first transformed to vectors $\pmb{\eta_f}$ and $\pmb{\eta_m}$. The implied joint multivariate distribution can then be conditioned on the constraints holding true for both sexes in the same way as before:
 $$
 \begin{aligned}
 \pmb{\eta} &= \begin{bmatrix}
@@ -93,7 +96,7 @@ Z & 0 \\
 \end{bmatrix} \\
 \Xi &= XPX^{T} \\
 \pmb{\eta} &\sim \text{MVN} (\pmb{0}, \Xi) \\
-\pmb{\eta_{.*}} | (\pmb{\eta_{.\dagger}} = \textbf{0}) &\sim \text{N} (0, \Xi_{**} - \Xi_{*\dagger}\Xi_{\dagger\dagger}^{-1}\Xi_{\dagger*}) \\
+\pmb{\eta_{.*}} | (\pmb{\eta_{.\dagger}} = \textbf{0}) &\sim \text{N} (0, \Xi_{**} - \Xi_{*\dagger}\Xi_{\dagger\dagger}^{-1}\Xi_{\dagger*}). \\
 \end{aligned}
 $$
 
