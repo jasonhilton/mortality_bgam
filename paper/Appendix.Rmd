@@ -15,6 +15,10 @@ output:
 
 *Supplemental Material to "Projecting UK Mortality using Bayesian Generalised Additive Models"*
 
+## R Code {-}
+
+Code to run all of the anaylsis in the paper is provided as a github repository at [https://github.com/jasonhilton/mortality_bgam](https://github.com/jasonhilton/mortality_bgam).
+
 
 ## Period Parameters {-}
 
