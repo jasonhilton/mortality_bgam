@@ -28,4 +28,5 @@ purrr::walk(file_list,
 # in case you wish to add an additional script to copy outputs elsewhere.
 if (file.exists("backup_copy.sh")){
   command <- paste0("backup_copy.sh ", archive_path)
+  system(command)
 }
