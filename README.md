@@ -127,15 +127,7 @@ library(tidyselect)
 ```
 
 ```
-## 
-## Attaching package: 'tidyselect'
-```
-
-```
-## The following objects are masked from 'package:dplyr':
-## 
-##     contains, ends_with, everything, matches, num_range, one_of,
-##     starts_with
+## Warning: package 'tidyselect' was built under R version 3.4.4
 ```
 
 ```r
@@ -144,6 +136,13 @@ library(rstan)
 library(purrr)
 library(ggfan)
 library(HMDHFDplus)
+```
+
+```
+## Warning: package 'HMDHFDplus' was built under R version 3.4.4
+```
+
+```r
 library(boot)
 library(abind)
 library(tibble)
@@ -151,7 +150,8 @@ library(loo)
 ```
 
 ```
-## This is loo version 1.1.0
+## This is loo version 2.0.0.
+## **NOTE: As of version 2.0.0 loo defaults to 1 core but we recommend using as many as possible. Use the 'cores' argument or set options(mc.cores = NUM_CORES) for an entire session. Visit mc-stan.org/loo/news for details on other changes.
 ```
 
 ```r
@@ -159,19 +159,27 @@ library(XLConnect)
 ```
 
 ```
+## Warning: package 'XLConnect' was built under R version 3.4.4
+```
+
+```
 ## Loading required package: XLConnectJars
 ```
 
 ```
-## XLConnect 0.2-13 by Mirai Solutions GmbH [aut],
+## Warning: package 'XLConnectJars' was built under R version 3.4.4
+```
+
+```
+## XLConnect 0.2-15 by Mirai Solutions GmbH [aut],
 ##   Martin Studer [cre],
 ##   The Apache Software Foundation [ctb, cph] (Apache POI),
 ##   Graph Builder [ctb, cph] (Curvesapi Java library)
 ```
 
 ```
-## http://www.mirai-solutions.com ,
-## http://miraisolutions.wordpress.com
+## http://www.mirai-solutions.com
+## https://github.com/miraisolutions/xlconnect
 ```
 
 ```r
@@ -179,7 +187,7 @@ library(curl)
 ```
 
 ```
-## Warning: package 'curl' was built under R version 3.4.3
+## Warning: package 'curl' was built under R version 3.4.4
 ```
 
 ```r
@@ -187,11 +195,18 @@ library(yaml)
 ```
 
 ```
-## Warning: package 'yaml' was built under R version 3.4.3
+## Warning: package 'yaml' was built under R version 3.4.4
 ```
 
 ```r
 library(devtools)
+```
+
+```
+## Warning: package 'devtools' was built under R version 3.4.3
+```
+
+```r
 devtools::session_info()
 ```
 
@@ -207,7 +222,7 @@ devtools::session_info()
 ##  language (EN)                        
 ##  collate  English_United Kingdom.1252 
 ##  tz       Europe/London               
-##  date     2018-01-26
+##  date     2018-06-14
 ```
 
 ```
@@ -215,73 +230,73 @@ devtools::session_info()
 ```
 
 ```
-##  package       * version   date       source                       
-##  abind         * 1.4-5     2016-07-21 CRAN (R 3.3.1)               
-##  assertthat      0.2.0     2017-04-11 CRAN (R 3.3.3)               
-##  backports       1.1.2     2017-12-13 CRAN (R 3.4.3)               
-##  base          * 3.4.2     2017-09-28 local                        
-##  bindr           0.1       2016-11-13 CRAN (R 3.4.1)               
-##  bindrcpp      * 0.2       2017-06-17 CRAN (R 3.4.1)               
-##  bitops          1.0-6     2013-08-17 CRAN (R 3.2.0)               
-##  boot          * 1.3-20    2017-08-06 CRAN (R 3.4.2)               
-##  colorspace      1.3-2     2016-12-14 CRAN (R 3.3.2)               
-##  compiler        3.4.2     2017-09-28 local                        
-##  curl          * 3.1       2017-12-12 CRAN (R 3.4.3)               
-##  datasets      * 3.4.2     2017-09-28 local                        
-##  devtools      * 1.13.4    2017-11-09 CRAN (R 3.4.0)               
-##  digest          0.6.13    2017-12-14 CRAN (R 3.4.3)               
-##  dplyr         * 0.7.4     2017-09-28 CRAN (R 3.4.2)               
-##  evaluate        0.10.1    2017-06-24 CRAN (R 3.4.1)               
-##  ggfan         * 0.1.1     2017-11-22 CRAN (R 3.4.2)               
-##  ggplot2       * 2.2.1     2016-12-30 CRAN (R 3.3.3)               
-##  glue            1.2.0     2017-10-29 CRAN (R 3.4.2)               
-##  graphics      * 3.4.2     2017-09-28 local                        
-##  grDevices     * 3.4.2     2017-09-28 local                        
-##  grid          * 3.4.2     2017-09-28 local                        
-##  gridExtra       2.3       2017-09-09 CRAN (R 3.4.2)               
-##  gtable          0.2.0     2016-02-26 CRAN (R 3.2.4)               
-##  highr           0.6       2016-05-09 CRAN (R 3.3.1)               
-##  HMDHFDplus    * 1.1.8     2017-06-06 Github (timriffe/TR1@66380a6)
-##  htmltools       0.3.6     2017-04-28 CRAN (R 3.4.0)               
-##  inline          0.3.14    2015-04-13 CRAN (R 3.2.0)               
-##  knitr         * 1.18      2017-12-27 CRAN (R 3.4.3)               
-##  labeling        0.3       2014-08-23 CRAN (R 3.2.0)               
-##  lazyeval        0.2.1     2017-10-29 CRAN (R 3.4.2)               
-##  loo           * 1.1.0     2018-01-22 Github (stan-dev/loo@0240c6d)
-##  magrittr      * 1.5       2014-11-22 CRAN (R 3.2.0)               
-##  matrixStats     0.52.2    2017-04-14 CRAN (R 3.3.3)               
-##  memoise         1.1.0     2017-04-21 CRAN (R 3.4.0)               
-##  methods         3.4.2     2017-09-28 local                        
-##  munsell         0.4.3     2016-02-13 CRAN (R 3.2.4)               
-##  parallel        3.4.2     2017-09-28 local                        
-##  pillar          1.0.1     2017-11-27 CRAN (R 3.4.3)               
-##  pkgconfig       2.0.1     2017-03-21 CRAN (R 3.4.1)               
-##  plyr            1.8.4     2016-06-08 CRAN (R 3.3.1)               
-##  purrr         * 0.2.4     2017-10-18 CRAN (R 3.4.2)               
-##  R6              2.2.2     2017-06-17 CRAN (R 3.4.1)               
-##  Rcpp            0.12.14   2017-11-23 CRAN (R 3.4.2)               
-##  RCurl           1.95-4.10 2018-01-04 CRAN (R 3.4.3)               
-##  rJava           0.9-9     2017-10-12 CRAN (R 3.4.2)               
-##  rlang           0.1.6     2017-12-21 CRAN (R 3.4.3)               
-##  rmarkdown     * 1.8       2017-11-17 CRAN (R 3.4.2)               
-##  rprojroot       1.3-2     2018-01-03 CRAN (R 3.4.3)               
-##  rstan         * 2.17.2    2017-12-21 CRAN (R 3.4.3)               
-##  scales        * 0.5.0     2017-08-24 CRAN (R 3.4.2)               
-##  StanHeaders   * 2.17.1    2017-12-20 CRAN (R 3.4.3)               
-##  stats         * 3.4.2     2017-09-28 local                        
-##  stats4          3.4.2     2017-09-28 local                        
-##  stringi         1.1.6     2017-11-17 CRAN (R 3.4.2)               
-##  stringr         1.2.0     2017-02-18 CRAN (R 3.3.3)               
-##  tibble        * 1.4.1     2017-12-25 CRAN (R 3.4.3)               
-##  tidyr         * 0.7.2     2017-10-16 CRAN (R 3.4.2)               
-##  tidyselect    * 0.2.3     2017-11-06 CRAN (R 3.4.2)               
-##  tools           3.4.2     2017-09-28 local                        
-##  utils         * 3.4.2     2017-09-28 local                        
-##  withr           2.1.1     2017-12-19 CRAN (R 3.4.3)               
-##  XLConnect     * 0.2-13    2017-05-14 CRAN (R 3.4.0)               
-##  XLConnectJars * 0.2-13    2017-05-14 CRAN (R 3.4.0)               
-##  XML             3.98-1.9  2017-06-19 CRAN (R 3.4.0)               
-##  yaml          * 2.1.16    2017-12-12 CRAN (R 3.4.3)
+##  package       * version    date       source                            
+##  abind         * 1.4-5      2016-07-21 CRAN (R 3.3.1)                    
+##  assertthat      0.2.0      2017-04-11 CRAN (R 3.3.3)                    
+##  backports       1.1.2      2017-12-13 CRAN (R 3.4.3)                    
+##  base          * 3.4.2      2017-09-28 local                             
+##  bindr           0.1.1      2018-03-13 CRAN (R 3.4.4)                    
+##  bindrcpp      * 0.2.2      2018-03-29 CRAN (R 3.4.4)                    
+##  bitops          1.0-6      2013-08-17 CRAN (R 3.2.0)                    
+##  boot          * 1.3-20     2017-08-06 CRAN (R 3.4.2)                    
+##  colorspace      1.4-0      2017-12-23 R-Forge (R 3.4.3)                 
+##  compiler        3.4.2      2017-09-28 local                             
+##  curl          * 3.2        2018-03-28 CRAN (R 3.4.4)                    
+##  datasets      * 3.4.2      2017-09-28 local                             
+##  devtools      * 1.13.5     2018-02-18 CRAN (R 3.4.3)                    
+##  digest          0.6.15     2018-01-28 CRAN (R 3.4.3)                    
+##  dplyr         * 0.7.5      2018-05-19 CRAN (R 3.4.4)                    
+##  evaluate        0.10.1     2017-06-24 CRAN (R 3.4.1)                    
+##  ggfan         * 0.1.2      2018-06-14 CRAN (R 3.4.4)                    
+##  ggplot2       * 2.2.1.9000 2018-06-13 Github (tidyverse/ggplot2@4db5122)
+##  glue            1.2.0      2017-10-29 CRAN (R 3.4.2)                    
+##  graphics      * 3.4.2      2017-09-28 local                             
+##  grDevices     * 3.4.2      2017-09-28 local                             
+##  grid          * 3.4.2      2017-09-28 local                             
+##  gridExtra       2.3        2017-09-09 CRAN (R 3.4.2)                    
+##  gtable          0.2.0      2016-02-26 CRAN (R 3.2.4)                    
+##  highr           0.7        2018-06-09 CRAN (R 3.4.4)                    
+##  HMDHFDplus    * 1.1.8      2018-05-22 local                             
+##  htmltools       0.3.6      2017-04-28 CRAN (R 3.4.0)                    
+##  inline          0.3.15     2018-05-18 CRAN (R 3.4.4)                    
+##  knitr         * 1.20       2018-02-20 CRAN (R 3.4.4)                    
+##  labeling        0.3        2014-08-23 CRAN (R 3.2.0)                    
+##  lazyeval        0.2.1      2017-10-29 CRAN (R 3.4.2)                    
+##  loo           * 2.0.0      2018-04-11 CRAN (R 3.4.2)                    
+##  magrittr      * 1.5        2014-11-22 CRAN (R 3.2.0)                    
+##  matrixStats     0.53.1     2018-02-11 CRAN (R 3.4.4)                    
+##  memoise         1.1.0      2017-04-21 CRAN (R 3.4.0)                    
+##  methods         3.4.2      2017-09-28 local                             
+##  munsell         0.5.0      2018-06-12 CRAN (R 3.4.4)                    
+##  parallel        3.4.2      2017-09-28 local                             
+##  pillar          1.2.3      2018-05-25 CRAN (R 3.4.4)                    
+##  pkgconfig       2.0.1      2017-03-21 CRAN (R 3.4.1)                    
+##  plyr            1.8.4      2016-06-08 CRAN (R 3.3.1)                    
+##  purrr         * 0.2.5      2018-05-29 CRAN (R 3.4.4)                    
+##  R6              2.2.2      2017-06-17 CRAN (R 3.4.1)                    
+##  Rcpp            0.12.17    2018-05-18 CRAN (R 3.4.4)                    
+##  RCurl           1.95-4.10  2018-01-04 CRAN (R 3.4.3)                    
+##  rJava           0.9-10     2018-05-29 CRAN (R 3.4.4)                    
+##  rlang           0.2.1      2018-05-30 CRAN (R 3.4.4)                    
+##  rmarkdown     * 1.10       2018-06-11 CRAN (R 3.4.4)                    
+##  rprojroot       1.3-2      2018-01-03 CRAN (R 3.4.3)                    
+##  rstan         * 2.17.3     2018-01-20 CRAN (R 3.4.4)                    
+##  scales        * 0.5.0.9000 2018-06-13 Github (hadley/scales@c28066a)    
+##  StanHeaders   * 2.17.2     2018-01-20 CRAN (R 3.4.4)                    
+##  stats         * 3.4.2      2017-09-28 local                             
+##  stats4          3.4.2      2017-09-28 local                             
+##  stringi         1.2.3      2018-06-12 CRAN (R 3.4.4)                    
+##  stringr         1.3.1      2018-05-10 CRAN (R 3.4.4)                    
+##  tibble        * 1.4.2      2018-01-22 CRAN (R 3.4.4)                    
+##  tidyr         * 0.8.1      2018-05-18 CRAN (R 3.4.4)                    
+##  tidyselect    * 0.2.4      2018-02-26 CRAN (R 3.4.4)                    
+##  tools           3.4.2      2017-09-28 local                             
+##  utils         * 3.4.2      2017-09-28 local                             
+##  withr           2.1.2      2018-06-13 Github (jimhester/withr@dbcd7cd)  
+##  XLConnect     * 0.2-15     2018-04-05 CRAN (R 3.4.4)                    
+##  XLConnectJars * 0.2-15     2018-04-05 CRAN (R 3.4.4)                    
+##  XML             3.98-1.11  2018-04-16 CRAN (R 3.4.4)                    
+##  yaml          * 2.1.19     2018-05-01 CRAN (R 3.4.4)
 ```
 
 
@@ -306,7 +321,7 @@ print(readRDS(file.path("results", "processed", "iridis_sesh.rds")))
 ##  language (EN)                        
 ##  collate  C                           
 ##  tz       <NA>                        
-##  date     2018-01-23
+##  date     2018-06-14
 ```
 
 ```
@@ -314,50 +329,50 @@ print(readRDS(file.path("results", "processed", "iridis_sesh.rds")))
 ```
 
 ```
-##  package     * version date       source                       
-##  abind       * 1.4-5   2016-07-21 CRAN (R 3.4.2)               
-##  assertthat    0.2.0   2017-04-11 CRAN (R 3.3.2)               
-##  base        * 3.4.2   2017-10-09 local                        
-##  bindr         0.1     2016-11-13 cran (@0.1)                  
-##  bindrcpp    * 0.2     2017-06-17 cran (@0.2)                  
-##  colorspace    1.3-2   2016-12-14 CRAN (R 3.4.2)               
-##  compiler      3.4.2   2017-10-09 local                        
-##  datasets    * 3.4.2   2017-10-09 local                        
-##  devtools    * 1.13.1  2017-05-13 CRAN (R 3.3.2)               
-##  digest        0.6.12  2017-01-27 CRAN (R 3.3.2)               
-##  dplyr       * 0.7.4   2017-09-28 CRAN (R 3.4.2)               
-##  ggplot2     * 2.2.1   2016-12-30 CRAN (R 3.3.2)               
-##  glue          1.1.1   2017-06-21 cran (@1.1.1)                
-##  graphics    * 3.4.2   2017-10-09 local                        
-##  grDevices   * 3.4.2   2017-10-09 local                        
-##  grid          3.4.2   2017-10-09 local                        
-##  gridExtra     2.2.1   2016-02-29 CRAN (R 3.3.2)               
-##  gtable        0.2.0   2016-02-26 CRAN (R 3.3.2)               
-##  inline        0.3.14  2015-04-13 CRAN (R 3.3.2)               
-##  lazyeval      0.2.1   2017-10-29 CRAN (R 3.4.2)               
-##  loo         * 1.1.0   2018-01-18 Github (stan-dev/loo@0240c6d)
-##  magrittr    * 1.5     2014-11-22 CRAN (R 3.4.2)               
-##  matrixStats   0.52.2  2017-04-14 cran (@0.52.2)               
-##  memoise       1.1.0   2017-04-21 CRAN (R 3.3.2)               
-##  methods       3.4.2   2017-10-09 local                        
-##  munsell       0.4.3   2016-02-13 CRAN (R 3.4.2)               
-##  parallel      3.4.2   2017-10-09 local                        
-##  pillar        1.1.0   2018-01-14 CRAN (R 3.4.2)               
-##  pkgconfig     2.0.1   2017-03-21 CRAN (R 3.4.2)               
-##  plyr          1.8.4   2016-06-08 CRAN (R 3.3.2)               
-##  purrr       * 0.2.4   2017-10-18 CRAN (R 3.4.2)               
-##  R6            2.2.2   2017-06-17 cran (@2.2.2)                
-##  Rcpp          0.12.11 2017-05-22 CRAN (R 3.3.2)               
-##  rlang         0.1.6   2017-12-21 CRAN (R 3.4.2)               
-##  rstan       * 2.17.2  2017-12-21 CRAN (R 3.4.2)               
-##  scales        0.4.1   2016-11-09 CRAN (R 3.3.2)               
-##  StanHeaders * 2.17.1  2017-12-20 CRAN (R 3.4.2)               
-##  stats       * 3.4.2   2017-10-09 local                        
-##  stats4        3.4.2   2017-10-09 local                        
-##  tibble      * 1.4.1   2017-12-25 CRAN (R 3.4.2)               
-##  tidyr       * 0.7.2   2017-10-16 CRAN (R 3.4.2)               
-##  tidyselect    0.2.3   2017-11-06 CRAN (R 3.4.2)               
-##  utils       * 3.4.2   2017-10-09 local                        
-##  withr         1.0.2   2016-06-20 CRAN (R 3.3.2)               
+##  package     * version date       source        
+##  abind       * 1.4-5   2016-07-21 CRAN (R 3.4.2)
+##  assertthat    0.2.0   2017-04-11 CRAN (R 3.3.2)
+##  base        * 3.4.2   2017-10-09 local         
+##  bindr         0.1     2016-11-13 cran (@0.1)   
+##  bindrcpp    * 0.2     2017-06-17 cran (@0.2)   
+##  colorspace    1.3-2   2016-12-14 CRAN (R 3.4.2)
+##  compiler      3.4.2   2017-10-09 local         
+##  datasets    * 3.4.2   2017-10-09 local         
+##  devtools    * 1.13.1  2017-05-13 CRAN (R 3.3.2)
+##  digest        0.6.12  2017-01-27 CRAN (R 3.3.2)
+##  dplyr       * 0.7.4   2017-09-28 CRAN (R 3.4.2)
+##  ggplot2     * 2.2.1   2016-12-30 CRAN (R 3.3.2)
+##  glue          1.1.1   2017-06-21 cran (@1.1.1) 
+##  graphics    * 3.4.2   2017-10-09 local         
+##  grDevices   * 3.4.2   2017-10-09 local         
+##  grid          3.4.2   2017-10-09 local         
+##  gridExtra     2.2.1   2016-02-29 CRAN (R 3.3.2)
+##  gtable        0.2.0   2016-02-26 CRAN (R 3.3.2)
+##  inline        0.3.14  2015-04-13 CRAN (R 3.3.2)
+##  lazyeval      0.2.1   2017-10-29 CRAN (R 3.4.2)
+##  loo         * 2.0.0   2018-04-11 CRAN (R 3.4.2)
+##  magrittr    * 1.5     2014-11-22 CRAN (R 3.4.2)
+##  matrixStats   0.52.2  2017-04-14 cran (@0.52.2)
+##  memoise       1.1.0   2017-04-21 CRAN (R 3.3.2)
+##  methods       3.4.2   2017-10-09 local         
+##  munsell       0.4.3   2016-02-13 CRAN (R 3.4.2)
+##  parallel      3.4.2   2017-10-09 local         
+##  pillar        1.1.0   2018-01-14 CRAN (R 3.4.2)
+##  pkgconfig     2.0.1   2017-03-21 CRAN (R 3.4.2)
+##  plyr          1.8.4   2016-06-08 CRAN (R 3.3.2)
+##  purrr       * 0.2.4   2017-10-18 CRAN (R 3.4.2)
+##  R6            2.2.2   2017-06-17 cran (@2.2.2) 
+##  Rcpp          0.12.11 2017-05-22 CRAN (R 3.3.2)
+##  rlang         0.1.6   2017-12-21 CRAN (R 3.4.2)
+##  rstan       * 2.17.2  2017-12-21 CRAN (R 3.4.2)
+##  scales        0.4.1   2016-11-09 CRAN (R 3.3.2)
+##  StanHeaders * 2.17.1  2017-12-20 CRAN (R 3.4.2)
+##  stats       * 3.4.2   2017-10-09 local         
+##  stats4        3.4.2   2017-10-09 local         
+##  tibble      * 1.4.1   2017-12-25 CRAN (R 3.4.2)
+##  tidyr       * 0.7.2   2017-10-16 CRAN (R 3.4.2)
+##  tidyselect    0.2.3   2017-11-06 CRAN (R 3.4.2)
+##  utils       * 3.4.2   2017-10-09 local         
+##  withr         1.0.2   2016-06-20 CRAN (R 3.3.2)
 ##  yaml        * 2.1.16  2017-12-12 CRAN (R 3.4.2)
 ```
