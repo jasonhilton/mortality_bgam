@@ -32,7 +32,7 @@ loos <- imap(lls, function(ll,i) {
     return(loo(ll, r_eff=relative_eff(ll)))
   }
 )
-weights <- model_weights(lls)
+weights <- loo_model_weights(loos)
 
 saveRDS(loos, paste0(path, "/all_loos.rds"))
 saveRDS(weights, paste0(path, "/model_weights.rds"))
