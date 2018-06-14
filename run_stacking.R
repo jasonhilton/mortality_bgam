@@ -23,11 +23,15 @@ cutpoints <- 80:95
 
 ## read in log-likelihoods -----------------------------------------------------
 lls <- map(cutpoints, get_log_lik, model_stem, path)
-lls %<>% map(function(ll) ll[,ll[1,] != 0])
+lls %<>% map(function(ll) ll[,,ll[1,1,] != 0])
 
 ## Calc looic and weights ------------------------------------------------------
 options(loo.cores = 4)
-loos <- imap(lls, function(ll,i) {print(paste("loo", i)); return(loo(ll))})
+loos <- imap(lls, function(ll,i) {
+    print(paste("loo", i))
+    return(loo(ll, r_eff=relative_eff(ll)))
+  }
+)
 weights <- model_weights(lls)
 
 saveRDS(loos, paste0(path, "/all_loos.rds"))

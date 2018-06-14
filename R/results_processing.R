@@ -408,7 +408,7 @@ get_log_rates_df <- function(log_rate_array, years, quantilise=T,
 #' 
 get_log_lik <- function(cp, model_stem, path, sex){
   model <- readRDS(file.path(path, paste0(model_stem,"_", cp, ".rds" )))
-  ll <- extract_log_lik(model$mort_fit)
+  ll <- extract_log_lik(model$mort_fit, merge_chains=F)
   return(ll)
 }
 
