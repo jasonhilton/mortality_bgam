@@ -17,7 +17,7 @@ output:
 
 ## R Code {-}
 
-Code to run all of the anaylsis in the paper is provided as a github repository at [https://github.com/jasonhilton/mortality_bgam](https://github.com/jasonhilton/mortality_bgam).
+Code to run all of the analysis in the paper is provided as a github repository at [https://github.com/jasonhilton/mortality_bgam](https://github.com/jasonhilton/mortality_bgam).
 
 
 ## Period Parameters {-}
